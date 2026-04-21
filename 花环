@@ -1,0 +1,18 @@
+#花环 多色
+from turtle import *
+import colorsys
+bgcolor("black")
+speed(0)
+hue = 0
+for i in range(0,16):
+    for j in range(18):
+        c=colorsys.hsv_to_rgb(hue,1.0,1.0)
+        color(c)
+        hue += 0.005
+        rt(90)
+        circle(150 - j * 6, 90)
+        lt(90)
+        circle(150 - j * 6, 90)
+        rt(180)
+    circle(40, 24)
+done()
