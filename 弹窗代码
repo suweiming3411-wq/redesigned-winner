@@ -1,0 +1,35 @@
+#弹窗  特效
+import tkinter as tk
+import random
+import threading
+import time
+def dow():
+    window = tk.Tk()
+    width = window.winfo_screenwidth()
+    height = window.winfo_screenheight()
+    a = random.randrange(0, width)
+    b = random.randrange(0, height)
+    window.title('王森我喜欢你')
+    window.geometry("260x50" + "+" + str(a) + "+" + str(b))
+    text = random.choice(["成功上岸", "前程似锦",
+                          "逢考必过", "金榜题名",
+                          "迎万难 赢万难 不负青春", "愿我们旗开得胜",
+                          "前路漫漫亦灿灿", "笔面第一",
+                          "梦想成真", "下一站：上岸", "关关难过关关过"])  # 显示文字
+    bg_colors = ['pink', 'lightskyblue', 'lightgreen', 'lavender', 'lightyellow', 'orange']
+    bg = random.choice(bg_colors)
+    tk.Label(window,
+             text=text,
+             bg=bg,
+             font=('华文行楷', 17),
+             width=30, height=2
+             ).pack()
+    window.after(8000, window.destroy)
+    window.mainloop()
+
+threads = []
+for i in range(1000):
+    t = threading.Thread(target=dow)
+    threads.append(t)
+    time.sleep(0.001)
+    threads[i].start()
