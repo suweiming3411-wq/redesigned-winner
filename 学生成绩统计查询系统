@@ -1,0 +1,97 @@
+caidan="""
+########################菜单#########################
+#    1.添加学生信息 2.修改学生信息 3.删除出学生信息    #
+#    4.查询学生信息 5.列出所有学生 6.统计班级的成绩    #
+#    7.退出系统                                     #
+####################################################
+"""
+students={}
+while True:
+    print(caidan)
+    shuzi=input("请输入需要的操作 ")
+    match shuzi:
+        case "1":
+            print("添加学生信息 ")
+            name=input("请根据提示录入学生姓名 ")
+            if name in students:
+                print("学生信息已存在，请重新输入！")
+                continue
+            chinese=float(input("请输入语文成绩 "))
+            math=float(input("请输入数学成绩 "))
+            english=float(input("请输入英语成绩 "))
+            students[name]={"语文":chinese,"数学":math,"英语":english}
+            print("已成功录入")
+        case "2":
+            print("修改学生信息 ")
+            name = input("请根据提示录入学生姓名 ")
+            if name not in students:
+                print("学生信息不存在，请重新输入！")
+                continue
+            chinese = float(input("请输入最新语文成绩 "))
+            math = float(input("请输入最新数学成绩 "))
+            english = float(input("请输入最新英语成绩 "))
+            students[name] = {"语文": chinese, "数学": math, "英语": english}
+            print("已成功修改")
+        case "3":
+            print("删除学生信息")
+            name=input("请根据提示录入需要删除学生的姓名 ")
+            if name not in students:
+                print("学生信息不存在，请重新输入！")
+                continue
+            del students[name]
+            print("删除成功")
+        case "4":
+            print("查询学生信息")
+            name = input("请根据提示录入学生姓名 ")
+            if name not in students:
+                print("学生信息不存在，请重新输入！")
+                continue
+            xinxi=students[name]
+            print(f"学生姓名:{name},语文成绩:{xinxi['语文']},数学成绩:{xinxi['数学']},英语成绩:{xinxi['英语']}")
+        case "5":
+            print("列出所有学生信息")
+            for k,v in students.items():
+                print(f"学生姓名:{k},语文:{v['语文']},数学:{v['数学']},英语:{v['英语']}")
+        case "6":
+            print("统计班级成绩")
+            if not students:
+                print("班级暂无学生信息，无法统计！")
+                continue
+            chinese_list = [(name, s["语文"]) for name, s in students.items()]
+            math_list = [(name, s["数学"]) for name, s in students.items()]
+            english_list = [(name, s["英语"]) for name, s in students.items()]
+            chinese_scores = [score for _, score in chinese_list]
+            chinese_max = max(chinese_scores)
+            chinese_min = min(chinese_scores)
+            chinese_avg = sum(chinese_scores) / len(chinese_scores)
+            chinese_max_names = [name for name, score in chinese_list if score == chinese_max]
+            chinese_min_names = [name for name, score in chinese_list if score == chinese_min]
+            math_scores = [score for _, score in math_list]
+            math_max = max(math_scores)
+            math_min = min(math_scores)
+            math_avg = sum(math_scores) / len(math_scores)
+            math_max_names = [name for name, score in math_list if score == math_max]
+            math_min_names = [name for name, score in math_list if score == math_min]
+            english_scores = [score for _, score in english_list]
+            english_max = max(english_scores)
+            english_min = min(english_scores)
+            english_avg = sum(english_scores) / len(english_scores)
+            english_max_names = [name for name, score in english_list if score == english_max]
+            english_min_names = [name for name, score in english_list if score == english_min]
+            print("语文成绩统计：")
+            print(f"  最高分：{chinese_max}，学生：{', '.join(chinese_max_names)}")
+            print(f"  最低分：{chinese_min}，学生：{', '.join(chinese_min_names)}")
+            print(f"  平均分：{chinese_avg:.2f}")
+            print("数学成绩统计：")
+            print(f"  最高分：{math_max}，学生：{', '.join(math_max_names)}")
+            print(f"  最低分：{math_min}，学生：{', '.join(math_min_names)}")
+            print(f"  平均分：{math_avg:.2f}")
+            print("英语成绩统计：")
+            print(f"  最高分：{english_max}，学生：{', '.join(english_max_names)}")
+            print(f"  最低分：{english_min}，学生：{', '.join(english_min_names)}")
+            print(f"  平均分：{english_avg:.2f}")
+        case "7":
+            print("退出系统")
+            break
+        case _:
+            print("输入错误,请重新输入")
